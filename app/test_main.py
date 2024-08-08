@@ -3,16 +3,26 @@ import pytest
 from app.main import is_isogram
 
 
-@pytest.mark.parametrize(
-    "word, expected_result",
-    [
-        ("playgrounds", True),
-        ("", True),
-        ("uncopyrightable", True),
-        ("ambidextrously", True),
-        ("look", False),
-        ("Adam", False)
-    ]
-)
-def should_return_correct_answer(word: str, expected_result: bool) -> None:
-    assert is_isogram(word) == expected_result
+def should_return_true_when_playgrounds():
+    assert is_isogram("playgrounds") == True
+
+
+def should_return_true_when_empty_string():
+    assert is_isogram("") == True
+
+
+def should_return_true_when_isogram():
+    assert is_isogram("uncopyrightable") == True
+
+
+def should_return_false_when_letters_repeat():
+    assert is_isogram("look") == False
+
+
+def should_return_false_ignoring_the_case():
+    assert is_isogram("Adam") == False
+
+
+def test_should_raise_attribute_error() -> None:
+    with pytest.raises(AttributeError):
+        is_isogram(123)
